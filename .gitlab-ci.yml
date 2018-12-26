@@ -16,10 +16,12 @@ stages:
 ##
 shellcheck:
   stage: Validate
-  image: 
-    name: koalaman/shellcheck:stable
-    entrypoint: []
+  image: ubuntu:latest
+  #image: cardboardci/shellcheck
   script:
+    - apt-get update
+    - apt-get install -y shellcheck
+    - echo ""
     - bash .build/shellcheck.sh
     
 # hadolint:
