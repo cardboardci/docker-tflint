@@ -14,17 +14,23 @@ stages:
   - Release
   - Deploy
 
+##
+## Validate
+##
 shellcheck:
   stage: Validate
-  image: koalaman/shellcheck
+  image: alpine:latest
   script:
-    - shellcheck provision/*
+    - echo "Perform shellcheck test on provision scripts"
 
+##
+## Build
+##
 build-master:
   stage: Build
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
-    - docker push "$CI_REGISTRY_IMAGE"
+    - #docker push "$CI_REGISTRY_IMAGE"
   only:
     - master
 
@@ -32,6 +38,44 @@ build:
   stage: Build
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+    - #docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
   except:
     - master
+
+##
+## Test
+##
+bats:
+  stage: Test
+  image: alpine:latest
+  script:
+    - echo "Run docker tests from bats"
+
+##
+## Analyze
+##
+audit:
+  stage: Analyze
+  image: alpine:latest
+  script:
+    - echo "Verify that all labels are applied to image"
+    - echo "Verify that the image is minimized"
+
+##
+## Release
+##
+tag:
+  stage: Release
+  image: alpine:latest
+  script:
+    - echo "Tag the image for deployment"
+    - echo "Deploy to the staging repository"
+
+##
+## Deploy
+##
+docker.hub:
+  stage: Deploy
+  image: alpine:latest
+  script:
+    - echo "Deploy the image to docker hub"
