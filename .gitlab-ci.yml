@@ -19,7 +19,6 @@ stages:
 ##
 shellcheck:
   stage: Validate
-  image: alpine:latest
   script:
     - echo "Perform shellcheck test on provision scripts"
 
@@ -45,7 +44,6 @@ build:
 ##
 bats:
   stage: Test
-  image: alpine:latest
   script:
     - echo "Run docker tests from bats"
 
@@ -54,7 +52,6 @@ bats:
 ##
 audit:
   stage: Analyze
-  image: alpine:latest
   script:
     - echo "Verify that all labels are applied to image"
     - echo "Verify that the image is minimized"
@@ -64,7 +61,6 @@ audit:
 ##
 tag:
   stage: Release
-  image: alpine:latest
   script:
     - echo "Tag the image for deployment"
     - echo "Deploy to the staging repository"
@@ -74,6 +70,5 @@ tag:
 ##
 docker.hub:
   stage: Deploy
-  image: alpine:latest
   script:
     - echo "Deploy the image to docker hub"
