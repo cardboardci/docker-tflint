@@ -18,7 +18,7 @@ shellcheck:
   stage: Validate
   image: cardboardci/hadolint
   script:
-    - bash .build/shellcheck.sh
+    - sh .build/shellcheck.sh
 
 hadolint:
   stage: Validate
