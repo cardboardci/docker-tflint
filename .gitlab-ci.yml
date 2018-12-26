@@ -24,7 +24,7 @@ hadolint:
   stage: Validate
   image: cardboardci/hadolint
   script:
-    - hadolint Dockerfile
+    - hadolint Dockerfile*
 
 ##
 ## Build
