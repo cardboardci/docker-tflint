@@ -16,20 +16,15 @@ stages:
 ##
 shellcheck:
   stage: Validate
-  image: ubuntu:latest
-  #image: cardboardci/shellcheck
+  image: cardboardci/hadolint
   script:
-    - apt-get update
-    - apt-get install -y shellcheck
-    - echo ""
     - bash .build/shellcheck.sh
-    
+
 hadolint:
   stage: Validate
   image: cardboardci/hadolint
   script:
     - hadolint Dockerfile
-
 # ##
 # ## Build
 # ##
@@ -53,7 +48,7 @@ hadolint:
 # ##
 # audit:
 #   stage: Analyze
-#   script: 
+#   script:
 #     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 #     - echo "Verify that all labels are applied to image"
 #     - echo "Verify that the image is minimized"
