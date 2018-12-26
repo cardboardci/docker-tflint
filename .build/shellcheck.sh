@@ -1,4 +1,3 @@
 #!/bin/sh
-echo "Hello World"
-
+set -e
 shellcheck provision/*.sh
