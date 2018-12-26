@@ -22,6 +22,12 @@ shellcheck:
   script:
     - echo "Perform shellcheck test on provision scripts"
 
+hadolint:
+  stage: Validate
+  image: hadolint/hadolint
+  script:
+    - hadolint Dockerfile
+
 ##
 ## Build
 ##
