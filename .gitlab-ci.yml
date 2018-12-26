@@ -16,7 +16,9 @@ stages:
 ##
 shellcheck:
   stage: Validate
-  image: koalaman/shellcheck:stable
+  image: 
+    name: koalaman/shellcheck:stable
+    entrypoint: []
   script:
     - bash .build/shellcheck.sh
     
