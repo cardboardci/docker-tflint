@@ -24,13 +24,11 @@ shellcheck:
     - echo ""
     - bash .build/shellcheck.sh
     
-# hadolint:
-#   stage: Validate
-#   image: hadolint/hadolint
-#   script:
-#     - apt-get update
-#     - apt-get install -y shellcheck
-#     - hadolint Dockerfile
+hadolint:
+  stage: Validate
+  image: hadolint/hadolint
+  script:
+    - hadolint Dockerfile
 
 # ##
 # ## Build
