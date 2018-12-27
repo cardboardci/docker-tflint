@@ -36,40 +36,38 @@ build:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
     - docker push "$CI_REGISTRY_IMAGE"
 
-# ##
-# ## Test
-# ##
-# bats:
-#   stage: Test
-#   script:
-#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-#     - echo "Run docker tests from bats"
+##
+## Test
+##
+bats:
+  stage: Test
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker pull "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
 
-# ##
-# ## Analyze
-# ##
-# audit:
-#   stage: Analyze
-#   script:
-#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-#     - echo "Verify that all labels are applied to image"
-#     - echo "Verify that the image is minimized"
+##
+## Analyze
+##
+audit:
+  stage: Analyze
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker pull "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
 
-# ##
-# ## Release
-# ##
-# tag:
-#   stage: Release
-#   script:
-#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-#     - echo "Tag the image for deployment"
-#     - echo "Deploy to the staging repository"
+##
+## Release
+##
+tag:
+  stage: Release
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker pull "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
 
-# ##
-# ## Deploy
-# ##
-# docker.hub:
-#   stage: Deploy
-#   script:
-#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-#     - echo "Deploy the image to docker hub"
+##
+## Deploy
+##
+docker.hub:
+  stage: Deploy
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker pull "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
