@@ -22,7 +22,7 @@ shellcheck:
   stage: "Validate"
   image: cardboardci/shellcheck
   script:
-    - sh .build/shellcheck.sh
+    - shellcheck provision/*.sh
 
 hadolint:
   stage: "Validate"
