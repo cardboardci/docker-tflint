@@ -1,0 +1,8 @@
+{
+  "name": "docker-tflint",
+  "tagline": "TFLint is a Terraform linter for detecting errors that can not be detected by terraform plan.",
+  "license": {
+    "name": "MIT"
+  },
+  "tags": ["docker", "terraform", "tflint"]
+}
