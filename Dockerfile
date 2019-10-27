@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.10.3
 
 RUN apk add --no-cache curl=7.61.1-r2 zip=3.0-r6 && rm -rf /var/cache/apk/*
 ARG TFLINT_VERSION=v0.8.2
