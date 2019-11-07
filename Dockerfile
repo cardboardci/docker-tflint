@@ -1,13 +1,19 @@
-FROM alpine:3.10.3
+FROM cardboardci/ci-core:disco
+USER root
 
-RUN apk add --no-cache curl=7.61.1-r2 zip=3.0-r6 && rm -rf /var/cache/apk/*
-ARG TFLINT_VERSION=v0.8.2
+# COPY provision/pkglist /cardboardci/pkglist
+# RUN apt-get update \
+#     && xargs -a /cardboardci/pkglist apt-get install --no-install-recommends -y \
+#     && apt-get clean \
+#     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -Lo tflint.zip https://github.com/wata727/tflint/releases/download/${TFLINT_VERSION}/tflint_linux_amd64.zip
+ARG VERSION=v0.8.2
+
+RUN curl -Lo tflint.zip https://github.com/wata727/tflint/releases/download/${VERSION}/tflint_linux_amd64.zip
 RUN unzip tflint.zip -d /bin 
 RUN rm -f tflint.zip
 
-CMD [ "tflint" ]
+USER cardboardci
 
 ##
 ## Image Metadata
