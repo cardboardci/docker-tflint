@@ -10,8 +10,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 ARG VERSION=v0.12.1
-
-RUN rm -f tflint.zip
 RUN curl -SL "https://github.com/wata727/tflint/releases/download/${VERSION}/tflint_linux_amd64.zip" -o /tmp/tflint.zip \
     && unzip /tmp/tflint.zip -d /usr/bin/ \
     && rm -f tflint.zip
