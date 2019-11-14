@@ -3,17 +3,18 @@ USER root
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-# COPY provision/pkglist /cardboardci/pkglist
-# RUN apt-get update \
-#     && xargs -a /cardboardci/pkglist apt-get install --no-install-recommends -y \
-#     && apt-get clean \
-#     && rm -rf /var/lib/apt/lists/*
+COPY provision/pkglist /cardboardci/pkglist
+RUN apt-get update \
+    && xargs -a /cardboardci/pkglist apt-get install --no-install-recommends -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-ARG VERSION=v0.8.2
+ARG VERSION=v0.12.1
 
-RUN curl -Lo tflint.zip https://github.com/wata727/tflint/releases/download/${VERSION}/tflint_linux_amd64.zip
-RUN unzip tflint.zip -d /bin 
 RUN rm -f tflint.zip
+RUN curl -SL "https://github.com/wata727/tflint/releases/download/${VERSION}/tflint_linux_amd64.zip" -o /tmp/tflint.zip \
+    && unzip /tmp/tflint.zip -d /usr/bin/ \
+    && rm -f tflint.zip
 
 USER cardboardci
 
